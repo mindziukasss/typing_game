@@ -7,7 +7,7 @@ var Fast_Typing = function () {
     var name;
     var last_state;
     var level;
-/*--------------Register ----------------------*/
+/*--------------Register -----------------------------------------------------------------------------------------------*/
     var Register_Logics = function () {
 
         var view = $('#register');
@@ -47,12 +47,11 @@ var Fast_Typing = function () {
           input.val('');
         };
 
-
     };
 
     var register = new Register_Logics();
 
-/*------------------------ Level ----------------*/
+/*------------------------ Level ---------------------------------------------------------------------------------------*/
 
     var Level_Select_logic = function () {
         var view = $('#level');
@@ -71,6 +70,7 @@ var Fast_Typing = function () {
         $(function(){
             play.click(function () {
              level = $('input[name = play]:checked').val();
+                change_State(STATE_GAME);
             });
         })
 
@@ -78,11 +78,49 @@ var Fast_Typing = function () {
 
     var level_sector = new Level_Select_logic();
 
-/*---------------------              --------------------*/
+/*--------------------- game -------------------------------------------------------------------------------------------*/
+    var Game_Logic = function () {
+        var view = $('#game');
+        var letters = 'abcdefghjklmnopuytrwqsvxz';
+        var timeOut;
+        var letterKey;
+        var leter_show = $('h1');
+
+        this.show = function () {
+            view.removeClass('hidden').prepend('<h2>'+ 'Player name:' + name + '! ' + 'Play level:' + ' ' + level + '</h2>');
+            change_letter();
+
+        };
+        this.hide = function () {
+            view.addClass('hidden');
+            // disable();
+        };
+
+        function enable() {
+          timeOut = setTimeout(change_letter, level * 1000);
+        }
+
+        function change_letter() {
+          letterKey = Math.round(Math.random() * (letters.length -1))
+            leter_show.html(letters[letterKey]);
+            enable()
+        };
+
+    };
+
+    var game = new Game_Logic();
+
+
+
+
+/*-----------------------   --------------------------------------------------------------------------------------------*/
+
+
+
     function initialize() {
 
     };
-/*------------------- change Status--------------------*/
+/*------------------- change Status-------------------------------------------------------------------------------------*/
 
     function change_State(value) {
         if (last_state)
@@ -93,9 +131,9 @@ var Fast_Typing = function () {
                 break;
             case STATE_LEVEL_SELECTOR:
                 last_state = level_sector;
-
                 break;
             case STATE_GAME:
+                last_state = game;
                 break;
             case STATE_GAMEOVER:
                 break;
