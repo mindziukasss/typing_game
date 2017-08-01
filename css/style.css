@@ -1,0 +1,11 @@
+#register{
+    margin: auto;
+    width: 50%;
+    padding: 208px;
+}
+#name{
+    margin: 12px 0px 0px 30px;
+}
+.hidden{
+    display: none;
+}
