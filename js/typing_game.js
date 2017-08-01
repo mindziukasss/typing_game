@@ -6,20 +6,83 @@ var Fast_Typing = function () {
 
     var name;
     var last_state;
-
-    var Register_Logig = function () {
+    var level;
+/*--------------Register ----------------------*/
+    var Register_Logics = function () {
 
         var view = $('#register');
 
+        var input = $('#name');
+        var go = $('#go');
+
         this.show = function () {
             view.removeClass('hidden');
+            enable();
+
         };
         this.hide = function () {
-            view.addClass('hidden')
+            view.addClass('hidden');
+            disable();
         };
+
+        function enable() {
+            go.attr('disabled', true);
+            input.keyup(function () {
+                if (input.val().length >= 3) {
+                    go.attr('disabled', false)
+                } else {
+                    go.attr('disabled', true)
+                }
+            });
+            go.click(function () {
+               name = input.val();
+                change_State(STATE_LEVEL_SELECTOR);
+
+            });
+        };
+
+        function disable() {
+          input.unbind();
+          go.unbind();
+          input.val('');
+        };
+
+
     };
 
-    var register = new Register_Logig();
+    var register = new Register_Logics();
+
+/*------------------------ Level ----------------*/
+
+    var Level_Select_logic = function () {
+        var view = $('#level');
+        var play = $('#play');
+
+        this.show = function () {
+            view.removeClass('hidden').prepend('<h2>'+ 'Player name:' + name + '</h2>');
+            // enable();
+
+        };
+        this.hide = function () {
+            view.addClass('hidden');
+            // disable();
+        };
+
+        $(function(){
+            play.click(function () {
+             level = $('input[name = play]:checked').val();
+            });
+        })
+
+    };
+
+    var level_sector = new Level_Select_logic();
+
+/*---------------------              --------------------*/
+    function initialize() {
+
+    };
+/*------------------- change Status--------------------*/
 
     function change_State(value) {
         if (last_state)
@@ -29,6 +92,8 @@ var Fast_Typing = function () {
                 last_state = register;
                 break;
             case STATE_LEVEL_SELECTOR:
+                last_state = level_sector;
+
                 break;
             case STATE_GAME:
                 break;
