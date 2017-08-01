@@ -59,20 +59,24 @@ var Fast_Typing = function () {
 
         this.show = function () {
             view.removeClass('hidden').prepend('<h2>'+ 'Player name:' + name + '</h2>');
-            // enable();
 
         };
         this.hide = function () {
             view.addClass('hidden');
-            // disable();
+            disable();
         };
 
         $(function(){
             play.click(function () {
              level = $('input[name = play]:checked').val();
                 change_State(STATE_GAME);
-            });
-        })
+            })
+        });
+
+        function disable() {
+            play.unbind();
+
+        };
 
     };
 
@@ -87,7 +91,7 @@ var Fast_Typing = function () {
         var leter_show = $('h1');
 
         this.show = function () {
-            view.removeClass('hidden').prepend('<h2>'+ 'Player name:' + name + '! ' + 'Play level:' + ' ' + level + '</h2>');
+            view.removeClass('hidden').prepend('<h2>'+ 'Player name:' +' '+ name + '</h2>');
             change_letter();
 
         };

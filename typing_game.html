@@ -5,7 +5,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -13,33 +13,26 @@
     <title>Typing_game</title>
 </head>
 <body>
-
-<div id="register" class="hidden">
-    <div class="container">
-        <div class="col-sm-6 col-md-4">
-            <div class="input-group">
-                <input id="name" type="text" class="form-control" placeholder="Username">
-                <button id="go" class="btn btn-primary">Register</button>
-            </div>
-        </div>
+<div class="box">
+    <div id="register" class="hidden">
+        <h2>Welcome to the game!</h2>
+        <label>Please register</label>
+        <input id="name" type="text" class="form-control" placeholder="Player name">
+        <button id="go" class="btn btn-primary">Register to game</button>
     </div>
-</div>
-
-<div id="level" class="hidden">
-    <div>
-        <input type="radio" name="play" value="9"> Easy<br>
-        <input type="radio" name="play" value="6"> Medium<br>
-        <input type="radio" name="play" value="3"> Hard
+    <div id="level" class="hidden">
+        <h2>Select level</h2>
+        <input type="radio" name="play" value="9" checked><label>Easy</label>
+        <input type="radio" name="play" value="6"><label>Normal</label>
+        <input type="radio" name="play" value="3"><label>Hard</label>
+        <button id="play" class="btn btn-success">Go play!</button>
     </div>
-    <button id="play" class="btn btn-success">Go play!</button>
+    <div id="game" class="hidden">
+        <h2>Play now!!!</h2>
+        <h1></h1>
+    </div>
+
 </div>
-
-<div id="game" class="hidden">
-    <h2>Play now!!!</h2>
-    <h1></h1>
-</div>
-
-
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
