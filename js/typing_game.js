@@ -94,6 +94,10 @@ var Fast_Typing = function () {
         var userInput = true;
         var is_GoldenLetter;
 
+        var letter_show_now;
+        var letter_click;
+        var amount;
+
 
         this.show = function () {
             view.removeClass('hidden').prepend('<h2>' + 'Player name:' + ' ' + name + '</h2>');
@@ -101,11 +105,13 @@ var Fast_Typing = function () {
             score = 0;
             change_letter();
             enable();
+
         };
         this.hide = function () {
             view.addClass('hidden');
             disable();
         };
+
 
         function updateScore() {
 
@@ -140,16 +146,26 @@ var Fast_Typing = function () {
         function enable() {
             $(window).keyup(
                 function (e) {
+
                     if (e.key === letters[letterKey]) {
                         updateScore()
                     } else {
                         removeLive();
                     }
+                    letter_click = Date.now();
+                    setTime();
+
                     userInput = true;
                     change_letter();
                 }
             );
 
+        }
+
+        function setTime() {
+
+            amount = (letter_click - letter_show_now)*0.001;
+            $('#second').html(parseFloat(amount).toFixed(2));
         }
 
         function change_letter() {
@@ -175,6 +191,7 @@ var Fast_Typing = function () {
             userInput = false;
             letterKey = Math.round(Math.random() * (letters.length - 1))
             letter_show.html(letters[letterKey]);
+            letter_show_now = Date.now();
             timeOut = setTimeout(change_letter, level * 1000);
         }
 
