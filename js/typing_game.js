@@ -91,6 +91,7 @@ var Fast_Typing = function () {
         var letterKey;
         var letter_show = $('h1');
         var livesCount;
+        var userInput = true;
 
 
         this.show = function () {
@@ -102,7 +103,7 @@ var Fast_Typing = function () {
         };
         this.hide = function () {
             view.addClass('hidden');
-            // disable();
+            disable();
         };
 
         function updateScore() {
@@ -113,7 +114,7 @@ var Fast_Typing = function () {
         function removeLive() {
             livesCount -= 1;
             $('#live').html(livesCount);
-            if(livesCount < 0)
+            if (livesCount < 0)
                 change_State(STATE_GAMEOVER);
 
         }
@@ -121,6 +122,7 @@ var Fast_Typing = function () {
         function enable() {
             $(window).keyup(
                 function (e) {
+                    userInput = true;
                     if (e.key === letters[letterKey]) {
                         updateScore()
                     } else {
@@ -134,11 +136,23 @@ var Fast_Typing = function () {
         }
 
         function change_letter() {
+
+            if (!userInput) {
+                removeLive()
+            } else {
+                userInput = false;
+            }
             clearTimeout(timeOut);
             letterKey = Math.round(Math.random() * (letters.length - 1))
             letter_show.html(letters[letterKey]);
             timeOut = setTimeout(change_letter, level * 1000);
         }
+
+        function disable() {
+            $(window).unbind();
+            clearTimeout(timeOut);
+
+        };
 
     };
 
