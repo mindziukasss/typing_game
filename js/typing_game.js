@@ -90,6 +90,7 @@ var Fast_Typing = function () {
         var timeOut;
         var letterKey;
         var letter_show = $('#point');
+        var gamer =$('#gamer')
         var livesCount;
         var userInput = true;
         var is_GoldenLetter;
@@ -100,7 +101,8 @@ var Fast_Typing = function () {
 
 
         this.show = function () {
-            view.removeClass('hidden').prepend('<h2>' + 'Player name:' + ' ' + name + '</h2>');
+            view.removeClass('hidden');
+            gamer.html(name);
             livesCount = 3;
             score = 0;
             change_letter();
@@ -146,11 +148,16 @@ var Fast_Typing = function () {
         function enable() {
             $(window).keyup(
                 function (e) {
-
+                    console.log(e.type);
+                    if (e.type === "keyup"){
+                        letter_show.toggleClass('active')
+                    }else{
+                        letter_show.removeClass('active')
+                    }
                     if (e.key === letters[letterKey]) {
                         updateScore()
                     } else {
-                        removeLive();
+                        removeLive()
                     }
                     letter_click = Date.now();
                     setTime();
@@ -188,6 +195,9 @@ var Fast_Typing = function () {
             }
 
 
+
+
+
             userInput = false;
             letterKey = Math.round(Math.random() * (letters.length - 1))
             letter_show.html(letters[letterKey]);
@@ -198,7 +208,6 @@ var Fast_Typing = function () {
         function disable() {
             $(window).unbind();
             clearTimeout(timeOut);
-            // change_letter();
         }
 
     };

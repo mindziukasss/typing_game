@@ -22,17 +22,28 @@
     </div>
     <div id="level" class="hidden">
         <h2>Select level</h2>
-        <input type="radio" name="play" value="9" checked><label>Easy</label>
+        <input type="radio" name="play" value="900" checked><label>Easy</label>
         <input type="radio" name="play" value="6"><label>Normal</label>
         <input type="radio" name="play" value="3"><label>Hard</label>
         <button id="play" class="btn btn-success">Go play!</button>
     </div>
     <div id="game" class="hidden">
-        <h2>Play now!!!</h2>
-        <h1 id="point"></h1>
-        <h4>score:<span id="score">0</span></h4>
-        <h4>live:<span id="live">3</span></h4>
-        <h4>time:<span id="second">s</span></h4>
+        <div class="col-md-6">
+            <h5>Name:<span id="gamer"></span></h5>
+        </div>
+        <div class="col-md-6">
+            <h4>Score:<span id="score">0</span></h4>
+        </div>
+        <h3>Play now!!!</h3>
+
+        <h2 class="button" id="point"></h2>
+
+        <div class="col-md-6">
+            <h4>Live:<span id="live">+3</span></h4>
+        </div>
+        <div class="col-md-6">
+            <h5>time:<span id="second">s</span></h5>
+        </div>
     </div>
 
     <div id="gameOver" class="hidden">
