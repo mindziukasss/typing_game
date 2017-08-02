@@ -112,23 +112,25 @@ var Fast_Typing = function () {
         }
 
         function removeLive() {
+
             livesCount -= 1;
             $('#live').html(livesCount);
-            if (livesCount < 0)
+
+            if (livesCount <= 0)
                 change_State(STATE_GAMEOVER);
+
 
         }
 
         function enable() {
             $(window).keyup(
                 function (e) {
-                    userInput = true;
                     if (e.key === letters[letterKey]) {
                         updateScore()
                     } else {
                         removeLive();
                     }
-
+                    userInput = true;
                     change_letter();
                 }
             );
@@ -139,10 +141,13 @@ var Fast_Typing = function () {
 
             if (!userInput) {
                 removeLive()
-            } else {
-                userInput = false;
             }
             clearTimeout(timeOut);
+
+            if (livesCount <= 0)
+                return;
+
+            userInput = false;
             letterKey = Math.round(Math.random() * (letters.length - 1))
             letter_show.html(letters[letterKey]);
             timeOut = setTimeout(change_letter, level * 1000);
@@ -151,8 +156,8 @@ var Fast_Typing = function () {
         function disable() {
             $(window).unbind();
             clearTimeout(timeOut);
-
-        };
+            // change_letter();
+        }
 
     };
 
@@ -164,7 +169,7 @@ var Fast_Typing = function () {
         var view = $('#gameOver');
 
         this.show = function () {
-            view.removeClass('hidden');
+            view.removeClass('hidden').append('<p>' + name+ 'kas cia vyksta' + '</p>');
             // enable();
 
         };
@@ -172,6 +177,10 @@ var Fast_Typing = function () {
             view.addClass('hidden');
             // disable();
         };
+
+        // function disable() {
+        //
+        // }
 
     };
 
