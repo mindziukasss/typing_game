@@ -108,6 +108,12 @@ var Fast_Typing = function () {
 
         function updateScore() {
             score += 1;
+            if ((score % 20) === 0) {
+                livesCount += 1;
+                $('#live').html(livesCount);
+
+            }
+
             $('#score').html(score);
         }
 
@@ -116,9 +122,9 @@ var Fast_Typing = function () {
             livesCount -= 1;
             $('#live').html(livesCount);
 
+
             if (livesCount <= 0)
                 change_State(STATE_GAMEOVER);
-
 
         }
 
@@ -169,7 +175,7 @@ var Fast_Typing = function () {
         var view = $('#gameOver');
 
         this.show = function () {
-            view.removeClass('hidden').append('<p>' + name+ 'kas cia vyksta' + '</p>');
+            view.removeClass('hidden').append('<p>' + name + score + '</p>');
             // enable();
 
         };
