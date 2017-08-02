@@ -89,9 +89,10 @@ var Fast_Typing = function () {
         var letters = 'abcdefghjklmnopuytrwqsvxz';
         var timeOut;
         var letterKey;
-        var letter_show = $('h1');
+        var letter_show = $('#point');
         var livesCount;
         var userInput = true;
+        var is_GoldenLetter;
 
 
         this.show = function () {
@@ -107,11 +108,19 @@ var Fast_Typing = function () {
         };
 
         function updateScore() {
-            score += 1;
-            if ((score % 20) === 0) {
+
+            if ((score % 20) === 0 && score !== 0) {
                 livesCount += 1;
                 $('#live').html(livesCount);
+            }
+            if (is_GoldenLetter) {
 
+                is_GoldenLetter = false;
+                for (var i = 0 ; i < 5 ; i++){
+                    updateScore();
+                }
+            }else{
+                score += 1;
             }
 
             $('#score').html(score);
@@ -145,6 +154,7 @@ var Fast_Typing = function () {
 
         function change_letter() {
 
+
             if (!userInput) {
                 removeLive()
             }
@@ -152,6 +162,15 @@ var Fast_Typing = function () {
 
             if (livesCount <= 0)
                 return;
+
+            if (Math.random() < 0.1) {
+                is_GoldenLetter = true;
+                letter_show.addClass('golden');
+            } else {
+                is_GoldenLetter = false;
+                letter_show.removeClass('golden');
+            }
+
 
             userInput = false;
             letterKey = Math.round(Math.random() * (letters.length - 1))
@@ -192,12 +211,6 @@ var Fast_Typing = function () {
 
     var game_over = new Game_Logic_Over();
 
-    /*-------------------------     -----------------------------------------------------------------------------------------*/
-
-    function initialize() {
-
-    };
-
     /*------------------- change Status-------------------------------------------------------------------------------------*/
 
     function change_State(value) {
@@ -220,8 +233,6 @@ var Fast_Typing = function () {
         }
         last_state.show();
     }
-
-    //function initialize js
 
     change_State(STATE_REGISTER);
 
