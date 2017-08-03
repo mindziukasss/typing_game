@@ -146,26 +146,25 @@ var Fast_Typing = function () {
         }
 
         function enable() {
+
+            $(window).keydown(
+                function () {
+                    letter_show.addClass('active')
+                });
             $(window).keyup(
                 function (e) {
-                    console.log(e.type);
-                    if (e.type === "keyup"){
-                        letter_show.toggleClass('active')
-                    }else{
                         letter_show.removeClass('active')
-                    }
-                    if (e.key === letters[letterKey]) {
-                        updateScore()
-                    } else {
-                        removeLive()
-                    }
-                    letter_click = Date.now();
-                    setTime();
+                        if (e.key === letters[letterKey]) {
+                            updateScore()
+                        } else {
+                            removeLive()
+                        }
+                        letter_click = Date.now();
+                        setTime();
 
-                    userInput = true;
-                    change_letter();
-                }
-            );
+                        userInput = true;
+                        change_letter();
+                });
 
         }
 
